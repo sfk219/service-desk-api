@@ -1,20 +1,27 @@
 # Service Desk API
 
-A FastAPI REST backend for service-desk tickets featuring SQLite persistence, request validation, containerization and automated API tests.
+A runnable **database-driven ticket-management REST API** built with Python, FastAPI, Pydantic and SQLite. Endpoints support validated ticket creation, listing/filtering, retrieving, status updates and deletion.
 
-**Technologies:** Python, FastAPI, SQLite, Docker.
+## Run
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-## Portfolio context
-This repository is an independently authored educational demonstration aligned with technologies in my professional background and CV. It does not contain employer-owned code or real customer data.
+Visit `http://localhost:8000/docs` for interactive API documentation. SQLite database is created automatically under `data/`.
 
-## What it demonstrates
-A FastAPI REST backend for service-desk tickets featuring SQLite persistence, request validation, containerization and automated API tests.
+## Example
+```bash
+curl -X POST http://localhost:8000/tickets -H "Content-Type: application/json" -d '{"title":"Fix staging alert","category":"platform","priority":"high"}'
+curl http://localhost:8000/tickets
+```
 
-## Limitations
-A backend engineering portfolio demonstration.
+## Tests and Docker
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+docker build -t service-desk-api .
+docker run -p 8000:8000 service-desk-api
+```
 
-## Source code
-The full working demonstration was prepared as part of my portfolio package; source files and tests will be added separately. This README alone does not constitute a working implementation.
-
-## About the author
-Samra Faisal Khan — MSc Software Engineering (NUST), based in Germany. [GitHub profile](https://github.com/sfk219) · [LinkedIn](https://www.linkedin.com/in/samra-faisal-khan-6a5232142/)
+**Portfolio demo**, no real customer or employer data.
